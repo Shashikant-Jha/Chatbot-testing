@@ -6,5 +6,5 @@ ___________________________________________________
 |______________________|__________________________|
 
 The horizontal table looks bad on Git. After pulling this file it will fit in your code editor. Any suggestions are most welcome.
-
+Before you start testing change the access token to the your access token in app.component.ts
 Restrictions: Must use only A and B columns          
