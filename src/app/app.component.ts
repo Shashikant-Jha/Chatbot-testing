@@ -12,7 +12,7 @@ import {IWorkSheet} from 'xlsx';
 export class AppComponent {
 
   baseUrl = 'https://api.dialogflow.com/v1/query?v=20150910';
-  accessToken = '4ccd45c119d34fdba04d54d023de4253';
+  accessToken = '4d93317815ac459da6f2783287b5f375';
   testSet = {};
   resultVal: Array<any> = [];
   counter = 0;
