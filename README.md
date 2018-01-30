@@ -5,4 +5,6 @@ ___________________________________________________
 |   Query              | Expected Response        |  
 |______________________|__________________________|
 
+The horizontal table looks bad on Git. After pulling this file it will fit in your code editor. Any suggestions are most welcome.
+
 Restrictions: Must use only A and B columns          
