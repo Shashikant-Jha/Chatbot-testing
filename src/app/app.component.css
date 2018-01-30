@@ -1,0 +1,18 @@
+.container{
+    width:  100% !important;
+}
+.row{
+    width: 100% !important;
+}
+.testResults{
+    margin-top: 20px;
+}
+.testData{
+    padding: 5px;
+}
+.tableData{
+    margin-top: 20px;
+}
+table:hover{
+    cursor: pointer;
+}

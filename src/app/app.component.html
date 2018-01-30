@@ -1,20 +1,94 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
 
+    <h2 class="text-center">
+        Chatbot Testing Tool
+        <blockquote class="blockquote text-center">
+            <footer class="blockquote-footer">Automate testing of
+                <cite title="Source Title">Chatbot</cite>
+            </footer>
+        </blockquote>
+    </h2>
+
+    <div class="container">
+        <h4>
+            <mark>Instruction for Testing</mark>
+        </h4>
+        <ol>
+            <li>Upload a file which containes the test data for Chatbot</li>
+            <li>Click on
+                <mark>Start Testing</mark> button to start the testing</li>
+            <li>Once testing is complete, you will see the results in form of table</li>
+            <li>This table can be exported as an Excel file</li>
+            <small>
+                <p>
+                    The file upload functionality can either be used with a text file that contains test data in form of json, or with an excel
+                    file.
+                </p>
+                The enteries in the text file should be in following format:
+                <p>
+                    {{ '{' }} "query 1": "expected Response 1", "query 2": "expected Response 2" {{ '}' }}
+                </p>
+            </small>
+        </ol>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="file" class="form-control-file mb-2 mr-sm-2" id="fileForUpload" (change)="upload()">
+        </div>
+        <button type="button" class="btn btn-info" (click)="startTesting()">Start testing</button>
+    </div>
+
+    <div class="container testResults" id="testData">
+        <ng-container *ngIf="tableView">
+            <h5>Test reults</h5>
+            <div class="row border rounded testData">
+                <div class="col-md-4">
+                    <b>Test cases:</b> {{testResult.totalTests}}
+                </div>
+                <div class="col-md-4">
+                    <b>Test cases passed:</b> {{testResult.passedTests}}
+                </div>
+                <div class="col-md-4">
+                    <b>Test cases failed:</b> {{testResult.failedTests}}
+                </div>
+                <div class="col-md-4">
+                    <b>Accuarcy% of Chatbot:</b> {{((testResult.passedTests/testResult.totalTests) * 100).toFixed(2)}}%
+                </div>
+                <div class="col-md-4">
+                    <a href="" (click)="generatePDF($event)">Export to Excel</a>
+                </div>
+            </div>
+        </ng-container>
+        <div class="row">
+            <table class="table table-responsive table-hover rounded tableData" *ngIf="tableView" id="resultTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Query</th>
+                        <th scope="col">Expected Result</th>
+                        <th scope="col">Actual Result</th>
+                        <th scope="col">Result</th>
+                    </tr>
+                </thead>
+                <ng-container *ngFor="let data of resultVal">
+                    <ng-container *ngIf="data.resultValue == 'success' ">
+                        <tr class="table-success">
+                            <td scope="col">{{data.queryText}}</td>
+                            <td scope="col">{{data.expectedResult}}</td>
+                            <td scope="col">{{data.actualResult}}</td>
+                            <td scope="col">{{data.resultValue}}</td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="data.resultValue == 'failure' ">
+                        <tr class="table-danger">
+                            <td scope="col">{{data.queryText}}</td>
+                            <td scope="col">{{data.expectedResult}}</td>
+                            <td scope="col">{{data.actualResult}}</td>
+                            <td scope="col">{{data.resultValue}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+</div>
